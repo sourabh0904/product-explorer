@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { getProducts, getCategories } from '@/lib/api'
 import { Product } from '@/types/product'
@@ -13,7 +13,7 @@ import { ErrorMessage } from '@/components/ErrorMessage'
 import { SortDropdown, SortOption } from '@/components/SortDropdown'
 import { useFavorites } from '@/contexts/FavoritesContext'
 
-export default function HomePage() {
+function HomePageContent() {
   const [products, setProducts] = useState<Product[]>([])
   const [categories, setCategories] = useState<string[]>([])
   const [loading, setLoading] = useState(true)
@@ -135,5 +135,13 @@ export default function HomePage() {
         {!loading && !error && <ProductGrid products={filteredProducts} />}
       </main>
     </div>
+  )
+}
+
+export default function HomePage() {
+  return (
+    <Suspense fallback={<LoadingSkeleton />}>
+      <HomePageContent />
+    </Suspense>
   )
 }

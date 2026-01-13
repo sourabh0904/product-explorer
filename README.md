@@ -34,7 +34,7 @@ A modern, production-quality product browsing application built with Next.js 16,
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/sourabh0904/product-explorer.git
    cd product-explorer
    ```
 
