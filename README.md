@@ -6,6 +6,12 @@ A modern, production-quality product browsing application built with Next.js 16,
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?logo=typescript)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-38bdf8?logo=tailwindcss)
 
+## 🌐 Live Demo
+
+**[View Live Application →](https://product-explorer-alpha.vercel.app/)**
+
+Experience the full application deployed on Vercel with all features enabled.
+
 ## ✨ Features
 
 ### Core Features
