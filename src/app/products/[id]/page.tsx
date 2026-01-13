@@ -1,12 +1,21 @@
-import { getProduct } from '@/lib/api'
+import { getProduct, getProducts } from '@/lib/api'
 import { ProductDetailClient } from './ProductDetailClient'
 import { notFound } from 'next/navigation'
 
-// Force dynamic rendering for this page
-export const dynamic = 'force-dynamic'
+// Allow dynamic params to be fetched on demand if not generated at build time
 export const dynamicParams = true
-export const revalidate = 0
-export const runtime = 'nodejs'
+
+export async function generateStaticParams() {
+  try {
+    const products = await getProducts()
+    return products.map((product) => ({
+      id: product.id.toString(),
+    }))
+  } catch (error) {
+    console.error('Failed to generate static params:', error)
+    return []
+  }
+}
 
 interface ProductPageProps {
   params: Promise<{ id: string }>
