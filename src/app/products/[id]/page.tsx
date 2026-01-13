@@ -4,6 +4,8 @@ import { notFound } from 'next/navigation'
 
 // Force dynamic rendering for this page
 export const dynamic = 'force-dynamic'
+export const revalidate = 0
+export const runtime = 'nodejs'
 
 interface ProductPageProps {
   params: Promise<{ id: string }>
@@ -14,6 +16,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
   
   try {
     const product = await getProduct(id)
+    if (!product) {
+      notFound()
+    }
     return <ProductDetailClient product={product} />
   } catch (error) {
     console.error('Failed to fetch product:', error)
