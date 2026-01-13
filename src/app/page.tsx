@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useMemo } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { getProducts, getCategories } from '@/lib/api'
 import { Product } from '@/types/product'
 import { Header } from '@/components/Header'
@@ -24,6 +25,15 @@ export default function HomePage() {
   const [sortOption, setSortOption] = useState<SortOption>('default')
   
   const { favorites } = useFavorites()
+  const searchParams = useSearchParams()
+
+  // Check for favorites query parameter
+  useEffect(() => {
+    const favoritesParam = searchParams.get('favorites')
+    if (favoritesParam === 'true') {
+      setShowFavoritesOnly(true)
+    }
+  }, [searchParams])
 
   // Fetch products and categories
   useEffect(() => {
